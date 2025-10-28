@@ -2,7 +2,7 @@ import express from "express";
 import puppeteer from "puppeteer";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 app.get("/upwork-jobs", async (req, res) => {
   const query = req.query.q || "google app script";
