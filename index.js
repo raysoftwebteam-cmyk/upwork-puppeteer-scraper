@@ -11,12 +11,13 @@ app.get("/upwork-jobs", async (req, res) => {
   try {
     const browser = await puppeteer.launch({
       headless: true,
+      executablePath: puppeteer.executablePath(), // ✅ Use Puppeteer’s own Chrome
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
+
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle2" });
 
-    // Wait for job listings to appear
     await page.waitForSelector("section.air3-card");
 
     const jobs = await page.evaluate(() => {
@@ -33,6 +34,7 @@ app.get("/upwork-jobs", async (req, res) => {
     await browser.close();
     res.json({ success: true, count: jobs.length, jobs });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ success: false, error: err.message });
   }
 });
