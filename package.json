@@ -1,0 +1,8 @@
+{
+  "name": "upwork-scraper",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.18.2",
+    "puppeteer": "^22.4.0"
+  }
+}
